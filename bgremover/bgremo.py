@@ -2,9 +2,10 @@ import cv2
 import cvzone
 from cvzone.SelfiSegmentationModule import SelfiSegmentation
 import os
+
 cap = cv2.VideoCapture(0)
-cap.set(3, 728)
-cap.set(4, 410)
+cap.set(3, 720)
+cap.set(4, 420)
 seg = SelfiSegmentation()
 
 
@@ -19,7 +20,7 @@ imgindex = 0
 while True:
     success, img = cap.read()
         
-    if len(imglist) < 0:
+    if len(imglist) > 0:
         imgbg = cv2.resize(imglist[imgindex], (img.shape[1], img.shape[0]))
         imgout = seg.removeBG(img, imgbg, cutThreshold=0.7)
     else:
