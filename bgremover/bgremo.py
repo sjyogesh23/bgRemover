@@ -18,9 +18,13 @@ imgindex = 0
 
 while True:
     success, img = cap.read()
+        
+    if len(imglist) < 0:
+        imgbg = cv2.resize(imglist[imgindex], (img.shape[1], img.shape[0]))
+        imgout = seg.removeBG(img, imgbg, cutThreshold=0.7)
+    else:
+        imgout = seg.removeBG(img, (255,255,255), cutThreshold=0.7)
     
-    imgbg = cv2.resize(imglist[imgindex], (img.shape[1], img.shape[0]))
-    imgout = seg.removeBG(img, imgbg , cutThreshold=.7)
     
     opscreen = cvzone.stackImages([img, imgout],2,1)
     cv2.imshow("Image", opscreen)
